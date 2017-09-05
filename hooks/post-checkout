@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euo pipefail
+
+echo "--- Searching for Clowns 🤡"
+echo "$BUILDKITE_BUILD_CHECKOUT_PATH"
+
+if grep -inIEr --color=ALWAYS -C1 "🤡" . ; then
+  echo "^^^ +++"
+  echo "+++ :warning: Detected clowns! 🔪"
+  exit 1
+fi
