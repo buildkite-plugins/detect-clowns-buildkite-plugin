@@ -7,7 +7,7 @@ A [Buildkite](https://buildkite.com/) plugin for detecting whether your code has
 ```yml
 steps:
   - plugins:
-      detect-clowns#v1.0.0: ~
+      detect-clowns#v2.0.0: ~
 ```
 
 ## License
