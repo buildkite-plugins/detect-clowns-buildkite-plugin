@@ -1,6 +1,0 @@
-{
-  "name": "detect-clowns	",
-  "description": "Detects clown emojis in your codebase",
-  "author": "@buildkite",
-  "public": true
-}

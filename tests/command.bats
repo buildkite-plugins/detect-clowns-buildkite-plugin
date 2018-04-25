@@ -2,18 +2,31 @@
 
 load '/usr/local/lib/bats/load.bash'
 
-@test "Post-checkout filters clowns" {
-  tmp_dir=$(mktemp -d -t clowns-checkout)
-  hook_path="$PWD/hooks/post-checkout"
+tmp_dir=$(mktemp -d -t clowns-checkout.XXXXXXXXXX)
 
-  cd "$tmp_dir"
-  echo "Beware the clowns! 🤡" > clowns.txt
+function cleanup {
+  rm -rf "$tmp_dir"
+}
+trap cleanup EXIT
 
+@test "Command fails if clowns they exist" {
   export BUILDKITE_BUILD_CHECKOUT_PATH=$tmp_dir
-  run $hook_path
+
+  echo "Beware the clowns! 🤡" > "$tmp_dir/code.txt"
+
+  run "$PWD/hooks/command"
 
   assert_failure
   assert_output --partial "Detected clowns!"
+}
 
-  rm -rf "$tmp_dir"
+@test "Command succeeds if clowns do not exist" {
+  export BUILDKITE_BUILD_CHECKOUT_PATH=$tmp_dir
+
+  echo "There art no clowns!" > "$tmp_dir/code.txt"
+
+  run "$PWD/hooks/command"
+
+  assert_failure
+  assert_output --partial "Detected clowns!"
 }
