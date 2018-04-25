@@ -3,7 +3,7 @@
 load '/usr/local/lib/bats/load.bash'
 
 @test "Post-checkout filters clowns" {
-  tmp_dir=$(mktemp -d -t clowns-checkout)
+  tmp_dir=$(mktemp -d -t clowns-checkout.XXXXXXXXXX)
   hook_path="$PWD/hooks/post-checkout"
 
   cd "$tmp_dir"
