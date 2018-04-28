@@ -12,6 +12,13 @@ steps:
       detect-clowns#v2.0.0: ~
 ```
 
+## Tests
+
+To run the tests of this plugin, run
+```sh
+docker-compose run --rm tests
+```
+
 ## License
 
 MIT (see [LICENSE](LICENSE))
