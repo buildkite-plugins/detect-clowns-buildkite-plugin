@@ -9,7 +9,7 @@ function cleanup {
 }
 trap cleanup EXIT
 
-@test "Command fails if clowns they exist" {
+@test "Command fails if clowns exist" {
   export BUILDKITE_BUILD_CHECKOUT_PATH=$tmp_dir
 
   echo "Beware the clowns! 🤡" > "$tmp_dir/code.txt"
