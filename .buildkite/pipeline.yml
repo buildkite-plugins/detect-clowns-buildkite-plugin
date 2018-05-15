@@ -5,8 +5,8 @@ steps:
         run: tests
   - label: ":sparkles: lint"
     plugins:
-      plugin-linter#v1.0.0:
-        name: detect-clowns
+      plugin-linter#v2.0.0:
+        id: detect-clowns
   - label: ":shell: Shellcheck"
     plugins:
       shellcheck#v1.0.1:
