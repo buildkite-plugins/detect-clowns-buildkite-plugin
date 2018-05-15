@@ -1,4 +1,4 @@
-name: detect-clowns
+name: Detect Clowns
 description: Detects clown emojis in your codebase
 author: https://github.com/buildkite
 requirements: []
