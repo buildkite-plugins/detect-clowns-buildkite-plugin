@@ -8,4 +8,13 @@ if grep -inr -C1 "🤡" . ; then
   echo "^^^ +++"
   echo "+++ :warning: Detected clowns! 🔪"
   exit 1
+elif grep -iq stefan <<< "$BUILDKITE_BUILD_CREATOR" ; then
+  echo "^^^ +++"
+  echo "+++ :warning: Detected clowns! 🤹"
+  echo
+  echo "\$BUILDKITE_BUILD_CREATOR is ${BUILDKITE_BUILD_CREATOR}"
+  echo
+  echo "He's probably an okay one, but LOOK OUT"
+  echo
+  echo "Continuing..."
 fi
