@@ -9,7 +9,7 @@ It contains a [command hook](hooks/command), and [tests](tests/command.bats) usi
 ```yml
 steps:
   - plugins:
-      - detect-clowns#v1.0.0: ~
+      - detect-clowns#v2.0.0: ~
 ```
 
 ## Tests
