@@ -9,14 +9,21 @@ It contains a [command hook](hooks/command), and [tests](tests/command.bats) usi
 ```yml
 steps:
   - plugins:
-      - detect-clowns#v1.0.0: ~
+      - detect-clowns#v2.0.0: ~
 ```
 
 ## Tests
 
-To run the tests of this plugin, run
-```sh
-docker-compose run --rm tests
+To run testing, shellchecks and plugin linting use use `bk run` with the [Buildkite CLI](https://github.com/buildkite/cli).
+
+```bash
+bk run
+```
+
+Or if you want to run just the tests, you can use the docker [Plugin Tester](https://github.com/buildkite-plugins/buildkite-plugin-tester):
+
+```bash
+docker run --rm -ti -v "${PWD}":/plugin buildkite/plugin-tester:latest
 ```
 
 ## License
