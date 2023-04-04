@@ -1,10 +1,7 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    ":disableDependencyDashboard"
   ],
-  "docker-compose": {
-    "digest": {
-      "enabled": false
-    }
-  }
+  "labels": ["dependencies"]
 }
