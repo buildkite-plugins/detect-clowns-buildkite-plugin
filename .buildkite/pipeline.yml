@@ -1,8 +1,8 @@
 steps:
+  - command: echo "Hello, world!"
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
-        command: ./hooks/command.sh
 
   - label: ":sparkles: lint"
     plugins:
