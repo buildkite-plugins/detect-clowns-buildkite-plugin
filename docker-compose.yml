@@ -3,25 +3,25 @@ version: '3'
 services:
   plugin-tester:
     image: buildkite/plugin-tester:v1.0.0
-    volumes:
-      - .:/app
-    environment:
-      BUILDKITE_PLUGIN_PATH: /app
-    # Add any additional environment variables needed for the plugin-tester
+    # volumes:
+    #   - .:/app
+    # environment:
+    #   BUILDKITE_PLUGIN_PATH: /app
+    # # Add any additional environment variables needed for the plugin-tester
 
   plugin-linter:
     image: buildkite/plugin-linter:v3.1.0
-    volumes:
-      - .:/app
-    environment:
-      BUILDKITE_PLUGIN_PATH: /app
-      BUILDKITE_PLUGIN_DETECT_CLOWNS_ID: detect-clowns
-    # Add any additional environment variables needed for the plugin-linter
+    # volumes:
+    #   - .:/app
+    # environment:
+    #   BUILDKITE_PLUGIN_PATH: /app
+    #   BUILDKITE_PLUGIN_DETECT_CLOWNS_ID: detect-clowns
+    # # Add any additional environment variables needed for the plugin-linter
 
   shellcheck:
     image: buildkite/plugins-shellcheck:v1.3.0
-    volumes:
-      - .:/app
-    environment:
-      BUILDKITE_PLUGIN_SHELLCHECK_FILES: hooks/**
-    # Add any additional environment variables needed for shellcheck
+    # volumes:
+    #   - .:/app
+    # environment:
+    #   BUILDKITE_PLUGIN_SHELLCHECK_FILES: hooks/**
+    # # Add any additional environment variables needed for shellcheck
