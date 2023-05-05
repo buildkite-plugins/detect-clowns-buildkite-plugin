@@ -1,4 +1,10 @@
 steps:
+
+  - label: "Set Buildkite Git commit metadata"
+    command: |
+      buildkite-agent meta-data exists buildkite:git:commit
+      buildkite-agent meta-data set buildkite:git:commit < /dev/stdin
+      
   - plugins:
       - detect-clowns#v2.0.0: ~
     command: |
