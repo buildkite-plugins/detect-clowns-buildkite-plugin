@@ -5,6 +5,7 @@ steps:
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
+        command: "systemctl start docker"
 
   - label: ":sparkles: lint"
     plugins:
