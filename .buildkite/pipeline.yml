@@ -1,5 +1,6 @@
 steps:
   - label: "🤡 :hammer:"
+    command: sudo systemctl start docker
     plugins:
       - plugin-tester#v1.0.0: ~
 
