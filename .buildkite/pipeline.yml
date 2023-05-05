@@ -5,8 +5,6 @@ steps:
           run: tester
           file: docker-compose.yml
 
-  - label: ""
-
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
