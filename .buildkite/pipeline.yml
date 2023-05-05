@@ -2,6 +2,7 @@ steps:
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
+        command: hooks/**
 
   - label: ":sparkles: lint"
     plugins:
