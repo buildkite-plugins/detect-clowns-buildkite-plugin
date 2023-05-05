@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+buildkite-agent pipeline upload
+
 echo "--- Searching for Clowns 🤡"
 echo "$BUILDKITE_BUILD_CHECKOUT_PATH"
 
