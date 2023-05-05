@@ -1,6 +1,6 @@
 steps:
-  - command: "sudo systemctl start docker"
-    label: "Start Docker Service"
+  # - command: "sudo systemctl start docker"
+  #   label: "Start Docker Service"
 
   - label: "🤡 :hammer:"
     plugins:
