@@ -1,9 +1,12 @@
 steps:
   - label: "Docker"
     plugins: 
-      - docker#v3.3.0:
-          image: buildkite/agent:latest
-          
+      - docker-compose#v3.3.0:
+          run: tester
+          file: docker-compose.yml
+
+  - label: ""
+
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
