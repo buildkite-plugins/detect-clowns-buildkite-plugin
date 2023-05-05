@@ -1,7 +1,8 @@
 steps:
   - plugins:
       - detect-clowns#v2.0.0: ~
-      
+    command: |
+      echo "Running the plugin-tester plugin"
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
