@@ -6,6 +6,7 @@ steps:
   - label: ":sparkles: lint"
     plugins:
       - plugin-linter#v3.1.0:
+          path: ./plugin.yml
           id: detect-clowns
 
   - label: ":shell: Shellcheck"
