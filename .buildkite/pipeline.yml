@@ -1,5 +1,4 @@
 steps:
-
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
@@ -10,10 +9,6 @@ steps:
           id: detect-clowns
 
   - label: ":shell: Shellcheck"
-    commands:
-        - COMMIT=$(git rev-parse HEAD)
-        - buildkite-agent meta-data set "buildkite:git:commit" "${COMMIT}"
     plugins:
       - shellcheck#v1.3.0:
           files: hooks/**
-
