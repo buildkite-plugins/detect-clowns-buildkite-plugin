@@ -1,9 +1,10 @@
 steps:
-  - command: echo "Hello, world!"
+  - plugins:
+      - detect-clowns#v2.0.0: ~
+      
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
-        command: ./hooks/command.sh
 
   - label: ":sparkles: lint"
     plugins:
