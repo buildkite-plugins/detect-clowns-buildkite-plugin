@@ -1,13 +1,15 @@
 steps:
   - label: "Docker"
+    command: yarn install && yarn run test
     plugins: 
-      - docker-compose#v3.3.0:
-          run: tester
-          file: docker-compose.yml
+      - docker#v3.2.0:
+          image: "buildkite/agent"
 
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
+        image: "ubuntu"
+          
 
   - label: ":sparkles: lint"
     plugins:
