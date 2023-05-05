@@ -3,7 +3,7 @@ steps:
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
-        command: echo "Hello, world!"
+        command: ./hooks/command.sh
 
   - label: ":sparkles: lint"
     plugins:
