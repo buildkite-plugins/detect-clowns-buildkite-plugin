@@ -1,16 +1,11 @@
 steps:
-  - label: "Checkout code"
-    plugins:
-      - git-checkout#v3.0.0:
-          commit: "{{ build.branch }}"
 
-    # Set Git commit SHA as metadata
-    # Note: the commit value is passed as STDIN to the meta-data set command
-    command: echo "{{ build.commit }}" | buildkite-agent meta-data set "buildkite:git:commit"
-    
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.0.0: ~
+        commands:
+        - COMMIT=$(git rev-parse HEAD)
+        - buildkite-agent meta-data set "buildkite:git:commit" "${COMMIT}"
 
   - label: ":sparkles: lint"
     plugins:
