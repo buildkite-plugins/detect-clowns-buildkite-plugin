@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-load '/usr/local/lib/bats/load.bash'
+load "${BATS_PLUGIN_PATH}/load.bash"
 
 tmp_dir=$(mktemp -d -t clowns-checkout.XXXXXXXXXX)
 command_hook="$PWD/hooks/command"
