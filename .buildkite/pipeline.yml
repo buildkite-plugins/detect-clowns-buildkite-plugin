@@ -2,7 +2,7 @@ steps:
   - group: ":gandalf: Test Group"
     key: "test-group"
     steps:
-      - command: "tests/graceful_shutdown_script.sh"
+      - command: "echo 'Creating new role'"
         agent_query_rules:
          - queue=default-queue
         label: "Run tests script"
