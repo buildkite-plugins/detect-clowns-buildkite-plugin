@@ -1,4 +1,5 @@
- - group: ":gandalf: Deploy Group"
+steps:
+  - group: ":gandalf: Deploy Group"
     key: "deploy-group"
     steps:
       - command: "tests/graceful_shutdown_script.sh"
