@@ -1,10 +1,7 @@
-steps:
-  - group: ":gandalf: Test Group"
-    key: "test-group"
+ - group: ":gandalf: Deploy Group"
+    key: "deploy-group"
     steps:
-      - command: "echo 'Creating new role'"
+      - command: "echo 'Deploying app'"
         agent_query_rules:
          - queue=default-queue
-        label: "Run tests script"
-
-
+        label: "Deploy app"
