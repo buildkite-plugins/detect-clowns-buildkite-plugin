@@ -2,7 +2,7 @@ steps:
   - group: ":gandalf: Test Group"
     key: "test-group"
     steps:
-      - command: "./graceful_shutdown_script.sh"
+      - command: ".buildkite/graceful_shutdown_script.sh"
         agent_query_rules:
          - queue=default-queue
         label: "Run tests script"
