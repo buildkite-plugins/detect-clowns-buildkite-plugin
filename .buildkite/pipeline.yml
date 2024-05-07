@@ -1,4 +1,3 @@
-steps:
     steps:
       - command: sleep 30 
         agent_query_rules:
