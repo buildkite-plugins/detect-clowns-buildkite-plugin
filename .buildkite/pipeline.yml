@@ -1,6 +1,6 @@
 steps:
   - group: ":gandalf: Deploy Group"
-    key: "deploy-group-test"
+    key: "deploy-group"
     steps:
       - command: "tests/graceful_shutdown_script.sh"
         agent_query_rules:
