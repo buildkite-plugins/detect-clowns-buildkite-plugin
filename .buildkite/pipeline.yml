@@ -1,5 +1,5 @@
 steps:
-  - group: ":gandalf: DeployGroup"
+  - group: ":gandalf: DeployvGroup"
     key: "deploy-group"
     steps:
       - command: "sleep 30"
