@@ -1,5 +1,5 @@
 steps:
-  - group: ":gandalf: Deploy Group"
+  - group: ":gandalf: DeployGroup"
     key: "deploy-group"
     steps:
       - command: "./test.sh"
