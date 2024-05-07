@@ -1,7 +1,6 @@
 steps:
-    key: "deploy-group"
     steps:
-      - command: "sleep 30"
+      - command: sleep 30 
         agent_query_rules:
          - queue=default-queue
         label: "Deploy app"
