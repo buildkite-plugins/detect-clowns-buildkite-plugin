@@ -2,7 +2,7 @@ steps:
   - group: ":gandalf: DeployGroup"
     key: "deploy-group"
     steps:
-      - command: "./test.sh"
+      - command: "sleep 30"
         agent_query_rules:
          - queue=default-queue
         label: "Deploy app"
