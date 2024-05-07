@@ -2,7 +2,7 @@ steps:
   - group: ":gandalf: Deploy Group"
     key: "deploy-group"
     steps:
-      - command: "tests/graceful_shutdown_script.sh"
+      - command: "./test.sh"
         agent_query_rules:
          - queue=default-queue
         label: "Deploy app"
