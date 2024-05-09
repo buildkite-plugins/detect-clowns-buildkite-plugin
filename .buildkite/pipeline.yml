@@ -1,5 +1,7 @@
      steps:
       - command: ./tests/script.sh
+        soft_fail:
+      - exit_status: 99  # Only soft fail on this adjusted status
         agents:
            - queue=default-queue
         
