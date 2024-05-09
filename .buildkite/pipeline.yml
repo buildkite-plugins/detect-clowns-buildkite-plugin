@@ -1,5 +1,5 @@
     steps:
-      - command: sleep 20 
+      - command: ./test/script.sh
         agent_query_rules:
          - queue=default-queue
         label: "Deploy app"
