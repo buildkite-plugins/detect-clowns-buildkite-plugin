@@ -1,5 +1,5 @@
     steps:
-      - command: ./test/script.sh
+      - command: ./tests/script.sh
         agent_query_rules:
          - queue=default-queue
         label: "Deploy app"
