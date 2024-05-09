@@ -1,10 +1,14 @@
 #!/bin/bash
 
-# Check if the retry count environment variable is set and greater than 0
-if [[ "$BUILDKITE_RETRY_COUNT" -gt 0 ]]; then
-    echo "This is a retry, sleeping for 30 seconds."
-    exit -1
+# Run your command
+exit -1
+
+# Capture the exit status
+exit_status=$?
+
+# Check if the exit status is not what you want to soft fail
+if [[ $exit_status -ne 42 ]]; then
+    exit 99  # Choose an exit status that represents all other "soft fail" statuses
 else
-    echo "This is the first attempt, sleeping for 120 seconds."
-    sleep 120
+    exit $exit_status
 fi
