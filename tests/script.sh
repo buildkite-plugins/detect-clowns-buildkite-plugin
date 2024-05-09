@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run your command
-exit 0
+exit 5678
 
 # Capture the exit status
 exit_status=$?
