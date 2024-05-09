@@ -1,5 +1,8 @@
-    steps:
-      - command: ./tests/script.sh
-        agent_query_rules:
-         - queue=default-queue
-        label: "Deploy app"
+     steps:
+      - command: ./test/script.sh
+        key: "tests"
+        timeout_in_minutes: 1
+        agents:
+           - queue=default-queue
+        retry:
+           automatic: true
