@@ -1,8 +1,5 @@
      steps:
       - command: ./tests/script.sh
-        key: "tests"
-        timeout_in_minutes: 1
         agents:
            - queue=default-queue
-        retry:
-           automatic: true
+        
