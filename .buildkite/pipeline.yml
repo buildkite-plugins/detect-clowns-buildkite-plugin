@@ -4,13 +4,13 @@ steps:
     steps:
       - label: ":test-tube: Run Tests Part 1"
         command:
-          - "chmod +x run_tests.sh"
+          - "chmod +x ./tests/run_tests.sh"
           - "./tests/run_tests.sh"
         artifact_paths:
           - "test-results/*.xml"
       - label: ":test-tube: Run Tests Part 2"
         command:
-          - "chmod +x run_tests.sh"
+          - "chmod +x ./tests/run_tests.sh"
           - "./tests/run_tests.sh"
         artifact_paths:
           - "test-results/*.xml"
