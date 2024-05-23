@@ -1,7 +1,27 @@
-     steps:
-      - command: ./tests/script.sh
-        soft_fail:
-          - exit_status: 90  # Only soft fail on this adjusted status
-        agents:
-           - queue=default-queue
-        
+steps:
+  - group: "Run Tests in Parallel"
+    key: "test-group"
+    steps:
+      - label: ":test-tube: Run Tests Part 1"
+        command:
+          - "chmod +x run_tests.sh"
+          - "./tests/run_tests.sh"
+        artifact_paths:
+          - "test-results/*.xml"
+      - label: ":test-tube: Run Tests Part 2"
+        command:
+          - "chmod +x run_tests.sh"
+          - "./tests/run_tests.sh"
+        artifact_paths:
+          - "test-results/*.xml"
+
+  - wait
+
+  - label: ":mag: Annotate Results"
+    plugins:
+      - junit-annotate#v1.0.0:
+          artifacts: "test-results/*.xml"
+
+agents:
+     - queue=default-queue
+  
