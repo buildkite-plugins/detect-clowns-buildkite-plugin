@@ -22,6 +22,4 @@ steps:
       - junit-annotate#v1.0.0:
           artifacts: "test-results/*.xml"
 
-agents:
-     - queue=default-queue
   
