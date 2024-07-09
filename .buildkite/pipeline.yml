@@ -4,4 +4,4 @@ steps:
   - label: "This step will cause an error"
     command: echo "This step has a syntax error"
   - label: "Another Step"
-    command: echo "BUILDKITE_MESSAGE is: $BUILDKITE_MESSAGE"
+    command: echo "$BUILDKITE_MESSAGE"
