@@ -1,5 +1,7 @@
 steps:
-  - label: "Parse BUILDKITE_MESSAGE"
-    env:
-      BUILDKITE_MESSAGE: "Revert \"Fix X button not dismissing `WebViewController` (#53506)\"
-    command: echo "BUILDKITE_MESSAGE is: $BUILDKITE_MESSAGE"
+  - label: "Example Step"
+    command: echo "This step is correct"
+  - label: "This step will cause an error"
+    command: echo "This step has a syntax error"
+  - label: "Another Step"
+    command:
