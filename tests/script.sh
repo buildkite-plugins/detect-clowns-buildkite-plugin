@@ -1,14 +1,22 @@
 #!/bin/bash
+set -euo pipefail
 
-# Run your command
-bash.sh
+# Function to safely access BUILDKITE_MESSAGE
+get_buildkite_message() {
+  if [ -z "${BUILDKITE_MESSAGE:-}" ]; then
+    echo "No commit message provided"
+  else
+    echo "${BUILDKITE_MESSAGE}"
+  fi
+}
 
-# Capture the exit status
-exit_status=$?
+# Use the function to get the commit message
+commit_message=$(get_buildkite_message)
 
-# Check if the exit status is not what you want to soft fail
-if [[ $exit_status -ne 42 ]]; then
-    exit 99  # Choose an exit status that represents all other "soft fail" statuses
-else
-    exit $exit_status
-fi
+# Your script continues here...
+echo "Commit message: ${commit_message}"
+
+# Simulate some work
+echo "Running some commands..."
+sleep 1
+echo "Finished!"
