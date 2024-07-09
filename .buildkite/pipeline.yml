@@ -1,25 +1,9 @@
 steps:
-  - group: "Run Tests in Parallel"
-    key: "test-group"
-    steps:
-      - label: ":test-tube: Run Tests Part 1"
-        command:
-          - "chmod +x ./tests/run_tests.sh"
-          - "./tests/run_tests.sh"
-        artifact_paths:
-          - "test-results/*.xml"
-      - label: ":test-tube: Run Tests Part 2"
-        command:
-          - "chmod +x ./tests/run_tests.sh"
-          - "./tests/run_tests.sh"
-        artifact_paths:
-          - "test-results/*.xml"
-
-  - wait
-
-  - label: ":mag: Annotate Results"
-    plugins:
-      - junit-annotate#v1.0.0:
-          artifacts: "test-results/*.xml"
+  - label: "Example Step"
+    command: echo "This step is correct"
+  - label: "This step will cause an error"
+    env:
+      BUILDKITE_MESSAGE: Revert "Fix X button not dismissing `WebViewController` (#53506)" This reverts commit 1b1bc47826aed5bc4cddc023aacd18b8614c442a.
+    command: echo "BUILDKITE_MESSAGE is: $BUILDKITE_MESSAGE"
 
   
