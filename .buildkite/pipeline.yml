@@ -5,3 +5,4 @@ steps:
       - export WRONG_VAR="$(echo blah)"
     - echo $CORRECT_VAR
       - echo $WRONG_VAR
+      
