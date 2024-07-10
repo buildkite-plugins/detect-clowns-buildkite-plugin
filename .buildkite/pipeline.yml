@@ -1,7 +1,21 @@
-steps:
-  - label: "Echo Wrong Variable with Bash Expansion"
-    command:
-      - export CORRECT_VAR="This is the correct variable"
-      - export WRONG_VAR="$(echo blah)"
-      - echo $CORRECT_VAR
-      - echo $WRONG_VAR
+set -uo pipefail  # do not include e option as this would cause the script to exit if it fails
+
+step="$1"
+project="$DBT_PROJECT_NAME"
+webhook="$ALERT_SLACK_CHANNEL"
+
+message="$step in $project has failed"
+
+generate_post_data() {
+  cat <<EOF
+  {
+      "text": "$message"
+    }
+EOF
+  }
+
+# Check if the outcome of the step is "failed"
+if [ "$(buildkite-agent step get "outcome" --step "$step")" != "passed" ]; then
+  # Send to slack channel
+  curl -X POST -H 'Content-type: application/json' --data "$(generate_post_data)" $webhook
+fi
