@@ -1,7 +1,7 @@
 steps:
-  - label: "Example Step"
-    command: echo $(BUILDKITE_AGENT_ID)
-  - label: "This step will cause an error"
-    command: echo "This step has a syntax error"
-  - label: "Another Step"
-    command: echo "$BUILDKITE_MESSAGE"
+  - label: "Echo Wrong Variable with Bash Expansion"
+    command:
+      - export CORRECT_VAR="This is the correct variable"
+      - export WRONG_VAR="$(echo blah)"
+      - echo $CORRECT_VAR
+      - echo $WRONG_VAR
