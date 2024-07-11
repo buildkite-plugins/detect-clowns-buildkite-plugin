@@ -159,8 +159,6 @@ plugin_config: &plugin_config
               file_path: "/tmp/client-secrets/client.account.apple-connect.api-key"
               file_permission: "600"
 
-agents:
-  queue: ios-mac2.metal-macos14.3-xcode15.3-apb1
 
 <<: *env
 
