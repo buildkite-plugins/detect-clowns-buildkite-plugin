@@ -1,8 +1,12 @@
 steps:
   - label: "Echo Wrong Variable with Bash Expansion"
+    depends_on: "target_selection"
+    soft_fail: true
+    async: true
+    build:
     command:
       - export CORRECT_VAR="This is the correct variable"
       - export WRONG_VAR="$(echo blah)"
-    - echo $CORRECT_VAR
+      - echo $CORRECT_VAR
       - echo $WRONG_VAR
       
