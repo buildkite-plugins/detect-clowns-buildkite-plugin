@@ -1,3 +1,169 @@
+env: &env
+  TIME_ZONE: "America/Los_Angeles"
+  BUILDKITE_AGENT_LOG_LEVEL: "error"
+  BUILDKITE_CLEAN_CHECKOUT: "true"
+  LANG: en_US.UTF-8
+  LC_ALL: en_US.UTF-8
+  AWS_DEFAULT_REGION: us-east-1
+  AWS_REGION: us-east-1
+
+retry_command: &retry_command
+  automatic:
+    - exit_status: -1  # agent was lost
+      limit: 2
+    - exit_status: 99  # AWS credentials
+      limit: 5
+    - exit_status: 125 # unexpected EOF
+      limit: 2
+    - exit_status: 255 # agent was shutdown
+      limit: 2
+
+plugin_config: &plugin_config
+  plugins:
+    - ssh://git@github.com/TinderBackend/scaffold-buildkite.git#v0.2.18:
+        environment:
+          variables:
+            # This is a protected env var, so need to be set via plugin procedure.
+            - name: BUILDKITE_GIT_CLEAN_FLAGS
+              value: "-n"
+        secret:
+          entries:
+            - group: "client"
+              kind: "account"
+              entity: "ios-devxp-bk-github"
+              key: "pat"
+              environ_variable: "GITHUB_API_TOKEN"
+            - group: "client"
+              kind: "account"
+              entity: "ios-artifactory-librelease-access"
+              key: "password"
+              environ_variable: "ARTIFACTORY_PASSWORD"
+            - group: "client"
+              kind: "account"
+              entity: "ios-artifactory-librelease-access"
+              key: "username"
+              environ_variable: "ARTIFACTORY_USER"
+            - group: "client"
+              kind: "account"
+              entity: "ios-bep-file"
+              key: "password"
+              environ_variable: "BEP_FILE_PASSWORD"
+            - group: "client"
+              kind: "application"
+              entity: "slack-webhook"
+              key: "url"
+              environ_variable: "SLACK_WEBHOOK_URL"
+            - group: "client"
+              kind: "account"
+              entity: "ios-sonarqube"
+              key: "token"
+              environ_variable: "BUILDKITE_SONARQUBE_TOKEN"
+            - group: "client"
+              kind: "account"
+              entity: "buildkite-readonly"
+              key: "token"
+              environ_variable: "BUILDKITE_READONLY_ACCESS_TOKEN"
+            - group: "client"
+              kind: "account"
+              entity: "ios-emergetool"
+              key: "token"
+              environ_variable: "IOS_EMERGETOOL_TOKEN"
+            - group: "client"
+              kind: "account"
+              entity: "ios-appleconnect"
+              key: "issuer-id"
+              environ_variable: "ISSUER_ID"
+            - group: "client"
+              kind: "account"
+              entity: "ios-appleconnect"
+              key: "key"
+              environ_variable: "KEY_IDENTIFIER"
+            - group: "client"
+              kind: "account"
+              entity: "ios-devxp-jira"
+              key: "user-email"
+              environ_variable: "JIRA_USER_EMAIL"
+            - group: "client"
+              kind: "account"
+              entity: "ios-devxp-jira"
+              key: "token"
+              environ_variable: "JIRA_API_TOKEN"
+            - group: "client"
+              kind: "account"
+              entity: "ios-devxp-bk-test-analytics"
+              key: "token"
+              environ_variable: "BUILDKITE_TEST_ANALYTICS_TOKEN_TINDER_IOS"
+            - group: "client"
+              kind: "account"
+              entity: "ios-ec2-user"
+              key: "password"
+              environ_variable: "NODE_PASSWD"
+            - group: "client"
+              kind: "account"
+              entity: "ios-devxp-screenshotbot-api"
+              key: "token"
+              environ_variable: "SCREENSHOTBOT_API_KEY_TINDER_IOS"
+            - group: "client"
+              kind: "account"
+              entity: "ios-devxp-screenshotbot-api"
+              key: "secret"
+              environ_variable: "SCREENSHOTBOT_API_SECRET_TINDER_IOS"
+            - group: "backend"
+              kind: "account"
+              entity: "scaffold-github"
+              key: "api-token"
+              environ_variable: "BUILDKITE_ACCESS_TOKEN"
+            - group: "client"
+              kind: "account"
+              entity: "apple-application"
+              key: "password"
+              environ_variable: "APPLE_APPLICATION_SPECIFIC_PASSWORD"
+            - group: "client"
+              kind: "account"
+              entity: "ios-fastlane"
+              key: "password"
+              environ_variable: "FASTLANE_PASSWORD"
+            - group: "client"
+              kind: "account"
+              entity: "ios-fastlane"
+              key: "session"
+              environ_variable: "FASTLANE_SESSION"
+            - group: "client"
+              kind: "application"
+              entity: "1713201421-ios-distribution"
+              key: "key"
+              file_path: "/tmp/client-secrets/client.application.1713201421-ios-distribution.key"
+              file_permission: "600"
+            - group: "client"
+              kind: "application"
+              entity: "verify-archive-google-application"
+              key: "credential"
+              file_path: "/tmp/client-secrets/client.application.verify-archive-google-application.credential"
+              file_permission: "600"
+            - group: "client"
+              kind: "account"
+              entity: "tinder-enterprise"
+              key: "certificate"
+              file_path: "/tmp/client-secrets/client.account.tinder-enterprise.certificate"
+              file_permission: "600"
+            - group: "client"
+              kind: "account"
+              entity: "tinder-enterprise"
+              key: "token"
+              file_path: "/tmp/client-secrets/Tinder_Enterprise_private_key.p12"
+              file_permission: "600"
+            - group: "client"
+              kind: "account"
+              entity: "apple-connect"
+              key: "api-key"
+              file_path: "/tmp/client-secrets/client.account.apple-connect.api-key"
+              file_permission: "600"
+
+agents:
+  queue: ios-mac2.metal-macos14.3-xcode15.3-apb1
+
+<<: *env
+
 steps:
   - command: ".buildkite/scripts/target_selection.sh"
     name: "Target Selection"
@@ -87,4 +253,3 @@ steps:
         BUILDKITE_PULL_REQUEST_BASE_BRANCH: main
         BUILDKITE_PULL_REQUEST_REPO: https://github.com/TinderApp/tinder_ios.git
         BUILD_QUEUE: ios-mac2.metal-macos14.3-xcode15.3-apb1
-      
