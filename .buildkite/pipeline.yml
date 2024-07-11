@@ -176,8 +176,6 @@ steps:
     key: "smart_tests"
     depends_on: "target_selection"
     timeout_in_minutes: 120 # 2 hours
-    agents:
-      queue: ios-mac2-m2pro.metal-macos14.3-xcode15.3-apb1
     retry:
       <<: *retry_command
     <<: *plugin_config
