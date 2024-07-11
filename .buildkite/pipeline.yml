@@ -1,12 +1,90 @@
 steps:
-  - label: "Echo Wrong Variable with Bash Expansion"
+  - command: ".buildkite/scripts/target_selection.sh"
+    name: "Target Selection"
+    key: "target_selection"
+    timeout_in_minutes: 20 # 20 minutes
+    retry:
+      <<: *retry_command
+    <<: *plugin_config
+
+  - command: ".buildkite/scripts/bazel.sh"
+    name: "Bazel Smart Tests"
+    key: "smart_tests"
     depends_on: "target_selection"
+    timeout_in_minutes: 120 # 2 hours
+    agents:
+      queue: ios-mac2-m2pro.metal-macos14.3-xcode15.3-apb1
+    retry:
+      <<: *retry_command
+    <<: *plugin_config
+
+  - command: ".buildkite/scripts/verify_local_developer_workflows.sh"
+    name: "Verify Local Developer Workflows"
+    key: "verify_local_developer_workflows"
+    depends_on: "target_selection"
+    timeout_in_minutes: 30
+    retry:
+      <<: *retry_command
+    <<: *plugin_config
+
+  - command: ".buildkite/scripts/static_analysis.sh"
+    name: "Static Analysis"
+    key: "static_analysis"
+    branches: "main"
+    timeout_in_minutes: 20 # 20 minutes
+    retry:
+      <<: *retry_command
+    <<: *plugin_config
+
+  - command: ".buildkite/scripts/verify_archive.sh"
+    name: "Verify Archive"
+    key: "verify_archive"
+    timeout_in_minutes: 40 # 40 minutes
+    retry:
+      automatic:
+        limit: 1
+    <<: *plugin_config
+
+  - command: ".buildkite/scripts/deploy_apps.sh"
+    name: "Deploy Apps"
+    key: "deploy_apps"
+    timeout_in_minutes: 40 # 40 minutes
+    env:
+      DEPLOY_APPS_TARGET_NAME: "//Projects/Tinder/Tinder:Tinder_BuildForDevice"
+      DEPLOY_APPS_FIREBASE_APP_ID: "1:465293127427:ios:8d5c05c43b988158"
+      DEPLOY_APPS_FIREBASE_GROUP: "iOS_PR_Tinder_AdhocDevtools_distribution"
+      DEPLOY_APPS_BUGSNAG_API_KEY: "add6d95c8c0796dd5f7cac9b7349fae6"
+      DEPLOY_APPS_RELEASE_NOTES: "[PR]"
+    retry:
+      <<: *retry_command
+    soft_fail:
+      - exit_status: 1
+    <<: *plugin_config
+
+  - command: ".buildkite/scripts/app_launch_verification.sh"
+    name: "App Launch Verification"
+    key: "app_launch_verification"
+    timeout_in_minutes: 40 # 40 minutes
+    retry:
+      <<: *retry_command
+    <<: *plugin_config
+
+  - trigger: "tinder-ios-ui-tests"
+    label: "Trigger UI Tests"
+    depends_on: "target_selection"
+    # [CW] 6/28/24 - Currently, primary CI success should not be coupled to UI Testing failures.
     soft_fail: true
     async: true
     build:
-    command:
-      - export CORRECT_VAR="This is the correct variable"
-      - export WRONG_VAR="$(echo blah)"
-      - echo $CORRECT_VAR
-      - echo $WRONG_VAR
+      # [Kai] 7/9/24 - There is a bug of save dynamic pipeline during a revert commit message. 
+      # More details can be found in the Slack thread: https://tinder.slack.com/archives/C01UDTX551T/p1720548024100329?thread_ts=1720471865.533509&cid=C01UDTX551T
+      # Let's use a fixed message instead of save dynamic pipeline until Buildkite fixes the bug.
+      branch: devxp/kai/use_fixed_message_until_bk_fix_bug
+      commit: b126e3799091f6fcffb88d01b4ac6f040818d630
+      message: "Trigger UI Tests"
+      env:
+        BUILDKITE_PULL_REQUEST: 53768
+        BUILDKITE_PULL_REQUEST_BASE_BRANCH: main
+        BUILDKITE_PULL_REQUEST_REPO: https://github.com/TinderApp/tinder_ios.git
+        BUILD_QUEUE: ios-mac2.metal-macos14.3-xcode15.3-apb1
       
