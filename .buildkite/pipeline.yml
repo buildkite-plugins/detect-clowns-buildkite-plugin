@@ -231,21 +231,4 @@ steps:
       <<: *retry_command
     <<: *plugin_config
 
-  - trigger: "tinder-ios-ui-tests"
-    label: "Trigger UI Tests"
-    depends_on: "target_selection"
-    # [CW] 6/28/24 - Currently, primary CI success should not be coupled to UI Testing failures.
-    soft_fail: true
-    async: true
-    build:
-      # [Kai] 7/9/24 - There is a bug of save dynamic pipeline during a revert commit message. 
-      # More details can be found in the Slack thread: https://tinder.slack.com/archives/C01UDTX551T/p1720548024100329?thread_ts=1720471865.533509&cid=C01UDTX551T
-      # Let's use a fixed message instead of save dynamic pipeline until Buildkite fixes the bug.
-      branch: devxp/kai/use_fixed_message_until_bk_fix_bug
-      commit: b126e3799091f6fcffb88d01b4ac6f040818d630
-      message: "Trigger UI Tests"
-      env:
-        BUILDKITE_PULL_REQUEST: 53768
-        BUILDKITE_PULL_REQUEST_BASE_BRANCH: main
-        BUILDKITE_PULL_REQUEST_REPO: https://github.com/TinderApp/tinder_ios.git
-        BUILD_QUEUE: ios-mac2.metal-macos14.3-xcode15.3-apb1
+ 
