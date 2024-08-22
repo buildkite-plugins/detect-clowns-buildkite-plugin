@@ -18,6 +18,3 @@ steps:
       manual: false
 EOF
 fi
-
-env:
-  MY_BOOLEAN_VAR: "true"
