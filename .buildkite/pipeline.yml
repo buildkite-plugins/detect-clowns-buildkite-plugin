@@ -1,6 +1,7 @@
+env:
+      # Intentionally adding a secret to trigger rejection
+      SECRET_KEY: "supersecretvalue"
 steps:
   - label: "Test Reject Secrets"
     command: "echo 'Running a test job'"
-    env:
-      # Intentionally adding a secret to trigger rejection
-      SECRET_KEY: "supersecretvalue"
+    
