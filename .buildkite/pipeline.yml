@@ -1,4 +1,7 @@
 steps:
+  - label: Get the version
+    command: |
+      echo "Hello World"
   - label: "🤡 :hammer:"
     plugins:
       - plugin-tester#v1.1.1: ~
