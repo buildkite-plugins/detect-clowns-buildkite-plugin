@@ -1,7 +1,6 @@
-env:
-      # Intentionally adding a secret to trigger rejection
-      SECRET_KEY: "supersecretvalue"
 steps:
-  - label: "Test Reject Secrets"
-    command: "echo 'Running a test job'"
-    
+  - trigger: pipeline-b
+    label: "Trigger B"
+    build:
+      meta_data:
+        triggered-from-job-id: "${BUILDKITE_JOB_ID}"
