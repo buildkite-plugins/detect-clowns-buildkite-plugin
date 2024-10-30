@@ -1,6 +1,2 @@
 steps:
-  - trigger: pipeline-b
-    label: "Trigger B"
-    build:
-      meta_data:
-        triggered-from-job-id: "${BUILDKITE_JOB_ID}"
+  - echo: "Buildkite shows this step on the UI" 
