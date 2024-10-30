@@ -1,2 +1,4 @@
 steps:
-  - echo: "Buildkite shows this step on the UI" 
+  - label: "Build and Generate Artifact"
+    commands:
+      - echo "Building the project UI ..."
