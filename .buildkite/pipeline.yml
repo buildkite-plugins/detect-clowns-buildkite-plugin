@@ -1,8 +1,6 @@
 steps:
   - commands:
     - "git clone https://github.com/ivannalisetska/detect-clowns-buildkite-plugin.git"
-    - "pwd"
-    - "echo $BUILDKITE_COMMAND"
-    - "echo $BUILDKITE_BUILD_PATH/${BUILDKITE_AGENT_NAME}/${BUILDKITE_ORGANIZATION_SLUG}/${BUILDKITE_PIPELINE_SLUG}"
+    - "echo $BUILDKITE_BUILD_CHECKOUT_PATH"
     agents:
       queue: "default"
