@@ -1,4 +1,8 @@
 steps:
-  - label: "Build and Generate Artifact"
-    commands:
-      - echo "Building the project UI ..."
+  - commands:
+    - "git clone https://github.com/ivannalisetska/detect-clowns-buildkite-plugin.git"
+    - "ls -la"
+    - "echo $BUILDKITE_SCRIPT_PATH"
+    - "echo $BUILDKITE_BUILD_PATH"
+    agents:
+      queue: "default"
