@@ -3,4 +3,4 @@ steps:
     - "git clone https://github.com/ivannalisetska/detect-clowns-buildkite-plugin.git"
     - "echo $BUILDKITE_BUILD_CHECKOUT_PATH"
     agents:
-      queue: "default"
+      queue: "test-queue-error"
