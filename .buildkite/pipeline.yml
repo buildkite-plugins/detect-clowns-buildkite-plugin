@@ -1,6 +1,3 @@
 steps:
   - commands:
     - "echo $BUILDKITE_BUILD_CHECKOUT_PATH"
-    - sleep: 5
-    - "echo It does work"
-    - exit -1 
