@@ -1,6 +1,6 @@
 steps:
   - label: "Step1"
-    command: "exit -1"
+    command: echo "exit -1"
 notify:
   # Notify private channel
   - slack:
