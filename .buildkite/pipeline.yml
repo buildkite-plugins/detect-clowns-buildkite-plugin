@@ -1,3 +1,10 @@
 steps:
-  - commands:
-    - "echo $BUILDKITE_BUILD_CHECKOUT_PATH"
+  - label: "Step1"
+    command: echo "helloo"
+notify:
+  # Notify private channel
+  - slack:
+      channels:
+        - "buildkite#test-customers-issue"
+    if: build.state == "failed" || pipeline.started_passing
+
