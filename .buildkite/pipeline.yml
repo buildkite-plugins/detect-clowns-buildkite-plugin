@@ -1,12 +1,4 @@
 steps:
-  - label: "Step 1 - Duplicate Key"
+  - label: "Diff repo checkout"
     key: key-1
-    command: echo "Running Step 1"
-    agents:
-      queue: "default"
-
-  - label: "Step 2 - Duplicate Key"
-    key: key-2  # Reusing the same key
-    command: exit -1
-    agents:
-      queue: "default"
+    command: echo "This is a different repository"
