@@ -1,10 +1,8 @@
 steps:
-  - label: "Step1"
-    command: exit -1
-notify:
-  # Notify private channel
-  - slack:
-      channels:
-        - "buildkite#test-customers-issue"
-    if: build.state == "failed" || pipeline.started_passing
+  - label: "Step 1 - Duplicate Key"
+    key: duplicate-key
+    command: echo "Running Step 1"
 
+  - label: "Step 2 - Duplicate Key"
+    key: duplicate-key  # Reusing the same key
+    command: echo "Running Step 2"
