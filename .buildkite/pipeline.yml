@@ -1,8 +1,12 @@
 steps:
   - label: "Step 1 - Duplicate Key"
-    key: duplicate-key
+    key: key-1
     command: echo "Running Step 1"
+    agents:
+      queue: "default"
 
   - label: "Step 2 - Duplicate Key"
-    key: duplicate-key  # Reusing the same key
-    command: echo "Running Step 2"
+    key: key-2  # Reusing the same key
+    command: exit -1
+    agents:
+      queue: "default"
