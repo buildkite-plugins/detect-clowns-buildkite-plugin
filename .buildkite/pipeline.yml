@@ -1,4 +1,6 @@
 steps:
-  - label: "Diff repo checkout"
-    key: key-1
-    command: echo "This is a different repository"
+  - label: "Test Annotation with --job"
+    command: |
+      echo "Running annotation test..."
+      echo "Job ID at runtime: $BUILDKITE_JOB_ID"
+      buildkite-agent annotate "Annotation for Job: $BUILDKITE_JOB_ID" --style "info" --job "$BUILDKITE_JOB_ID"
