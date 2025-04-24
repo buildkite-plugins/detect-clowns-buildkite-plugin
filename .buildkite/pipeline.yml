@@ -1,6 +1,7 @@
 steps:
-  - label: "Test Annotation with --job"
+  - label: ":wave: Show Cancel Signal"
     command: |
-      echo "Running annotation test..."
-      echo "Job ID at runtime: $BUILDKITE_JOB_ID"
-      buildkite-agent annotate "Annotation for Job: $BUILDKITE_JOB_ID" --style "info" --job "$BUILDKITE_JOB_ID"
+      echo "BUILDKITE_CANCEL_SIGNAL is: $BUILDKITE_CANCEL_SIGNAL"
+  - label: ":wave: Show Cancel Signal"    
+    command: |
+      echo "BUILDKITE_CANCEL_SIGNAL is: $$BUILDKITE_CANCEL_SIGNAL"
