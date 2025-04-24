@@ -8,6 +8,6 @@ steps:
   - label: ":wave: Show PLUGIN VALIDATION"
     command: |
       echo "BUILDKITE_PLUGIN_VALIDATION is: $BUILDKITE_PLUGIN_VALIDATION"
-   - label: ":wave: Show PLUGIN VALIDATION"
+  - label: ":wave: Show PLUGIN VALIDATION"
     command: |
       echo "BUILDKITE_PLUGIN_VALIDATION is: $$BUILDKITE_PLUGIN_VALIDATION"    
