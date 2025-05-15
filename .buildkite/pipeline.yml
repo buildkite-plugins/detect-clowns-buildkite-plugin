@@ -1,13 +1,8 @@
 steps:
-  - label: ":wave: Show Cancel Signal"
-    command: |
-      echo "BUILDKITE_CANCEL_SIGNAL is: $BUILDKITE_CANCEL_SIGNAL"
-  - label: ":wave: Show Cancel Signal"    
-    command: |
-      echo "BUILDKITE_CANCEL_SIGNAL is: $$BUILDKITE_CANCEL_SIGNAL"
-  - label: ":wave: Show PLUGIN VALIDATION"
-    command: |
-      echo "BUILDKITE_PLUGIN_VALIDATION is: $BUILDKITE_PLUGIN_VALIDATION"
-  - label: ":wave: Show PLUGIN VALIDATION"
-    command: |
-      echo "BUILDKITE_PLUGIN_VALIDATION is: $$BUILDKITE_PLUGIN_VALIDATION"    
+  - label: "Do thing"
+    command: echo "Build completed!"
+notify:
+  - slack:
+      channels:
+        - "#test-customers-issue"
+      message: "This is the Build URL: ${BUILDKITE_BUILD_URL}\n and the build was created by: ${BUILDKITE_BUILD_CREATOR_EMAIL} "
