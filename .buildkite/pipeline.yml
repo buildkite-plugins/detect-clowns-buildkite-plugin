@@ -4,5 +4,6 @@ steps:
 notify:
   - slack:
       channels:
-        - "#test-customers-issue"
-      message: "This is the Build URL: ${BUILDKITE_BUILD_URL}\n and the build was created by: ${BUILDKITE_BUILD_CREATOR_EMAIL} "
+        - "buildkite#test-customers-issue"
+      message: |
+        Build #${BUILDKITE_BUILD_NUMBER}
