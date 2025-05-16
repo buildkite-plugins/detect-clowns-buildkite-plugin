@@ -6,4 +6,4 @@ notify:
       channels:
         - "buildkite#test-customers-issue"
       message: |
-        Build #${BUILDKITE_BUILD_NUMBER}
+        Build #${BUILDKITE_BUILD_NUMBER} for ${BUILDKITE_PIPELINE_NAME} on branch ${BUILDKITE_BRANCH} ${BUILDKITE_BUILD_STATE}!
