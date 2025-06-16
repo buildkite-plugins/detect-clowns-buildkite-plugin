@@ -21,9 +21,9 @@ steps:
   # 4️  Long (≈2 KiB) secret – full round-trip
   - label: " Long secret (2 KiB)"
     commands: |
-    head -c 2048 </dev/urandom | base64 | tr -d '\n' > bigsecret.txt
-    buildkite-agent redactor add bigsecret.txt
-    cat bigsecret.txt
+      head -c 2048 </dev/urandom | base64 | tr -d '\n' > bigsecret.txt
+      buildkite-agent redactor add bigsecret.txt
+      cat bigsecret.txt
 
   #   Overlapping secrets (prefix + full)
   - label: " Overlapping secrets"
