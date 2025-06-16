@@ -70,7 +70,7 @@ steps:
       echo 'plainsecret' | buildkite-agent redactor add
       echo 'jsonsecret plainsecret'
 
-#   Binary file content
+# Binary file content
   - label: ":eleven: Binary secret"
     commands: |
       # copy a small binary so we have a predictable path
