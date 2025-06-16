@@ -1,51 +1,51 @@
 steps:
-  # 1️⃣  Multiline / trailing-space secret
+  #   Multiline / trailing-space secret
   - label: ":one: Multiline secret"
     commands: |
       printf 'line1\nline2 ' > secret.txt
       buildkite-agent redactor add secret.txt
       echo -e "line1 line2"
 
-  # 2️⃣  Non-ASCII characters
+  #   Non-ASCII characters
   - label: ":two: Non-ASCII secret"
     commands: |
       echo 'pässw🔑rd' | buildkite-agent redactor add
       echo 'pässw🔑rd appears here'
 
-  # 3️⃣  Regex-looking characters
+  #   Regex-looking characters
   - label: ":three: Regex-y secret"
     commands: |
       echo 'a.*b?c' | buildkite-agent redactor add
       echo 'a.*b?c a.*b?c'
 
-  # 4️⃣  Long (≈2 KiB) secret – stays under 10 k limit
+  #   Long (≈2 KiB) secret – stays under 10 k limit
   - label: ":four: Long secret (2 KiB)"
     commands: |
       head -c 2048 </dev/urandom | base64 > bigsecret.txt
       buildkite-agent redactor add bigsecret.txt
-      cat bigsecret.txt | head -c 100   # prints a chunk that must redact
+      cat bigsecret.txt | head -c 10   # prints a chunk that must redact
 
-  # 5️⃣  Overlapping secrets (prefix + full)
+  #   Overlapping secrets (prefix + full)
   - label: ":five: Overlapping secrets"
     commands: |
       echo 'abc'     | buildkite-agent redactor add
       echo 'abcdef'  | buildkite-agent redactor add
       echo 'abc abcdef'
 
-  # 6️⃣  Same secret repeated on one line
+  #   Same secret repeated on one line
   - label: ":six: Repeated secret same line"
     commands: |
       echo 'spam' | buildkite-agent redactor add
       echo 'spam spam spam'
 
-  # 7️⃣  Persistence across multiple commands
+  #  Persistence across multiple commands
   - label: ":seven: Persistence in step"
     commands: |
       echo 'staysecret' | buildkite-agent redactor add
       echo 'staysecret first time'
       echo 'staysecret second time'
 
-  # 8️⃣  Secret leaked from a “hook / plugin”-style script
+  #   Secret leaked from a “hook / plugin”-style script
   - label: ":eight: Hook‐style output"
     commands: |
       echo 'hooksecret' | buildkite-agent redactor add
@@ -56,28 +56,28 @@ steps:
       chmod +x plugin-script.sh
       ./plugin-script.sh
 
-  # 9️⃣  File with no trailing newline
+  #   File with no trailing newline
   - label: ":nine: No-newline file"
     commands: |
       printf 'nonewline' > nn.txt
       buildkite-agent redactor add nn.txt
       echo 'nonewline'
 
-  # 🔟  Mixed json / none formats
+  #   Mixed json / none formats
   - label: ":ten: Mixed formats"
     commands: |
       echo '{"jsonkey":"jsonsecret"}' | buildkite-agent redactor add --format json
       echo 'plainsecret' | buildkite-agent redactor add
       echo 'jsonsecret plainsecret'
 
-  # 1️⃣1️⃣  Binary file content
+  #   Binary file content
   - label: ":eleven: Binary secret"
     commands: |
       cp "$(command -v ls)" /tmp/ls.bin       # any small binary will do
       buildkite-agent redactor add /tmp/ls.bin
       xxd -l 32 /tmp/ls.bin                   # should print [REDACTED]
 
-  # 1️⃣2️⃣  Parallelism: secret added in every shard
+  #   Parallelism: secret added in every shard
   - label: ":twelve: Parallel shards"
     parallelism: 3
     commands: |
