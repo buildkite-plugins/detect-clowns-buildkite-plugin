@@ -1,52 +1,57 @@
 steps:
   #   Multiline / trailing-space secret
-  - label: ":one: Multiline secret"
+  - label: " Multiline secret"
     commands: |
       printf 'line1\nline2 ' > secret.txt
       buildkite-agent redactor add secret.txt
       echo -e "line1 line2"
 
   #   Non-ASCII characters
-  - label: ":two: Non-ASCII secret"
+  - label: " Non-ASCII secret"
     commands: |
       echo 'pässw🔑rd' | buildkite-agent redactor add
       echo 'pässw🔑rd appears here'
 
   #   Regex-looking characters
-  - label: ":three: Regex-y secret"
+  - label: " Regex-y secret"
     commands: |
       echo 'a.*b?c' | buildkite-agent redactor add
       echo 'a.*b?c a.*b?c'
 
-  #   Long (≈2 KiB) secret – stays under 10 k limit
-  - label: ":four: Long secret (2 KiB)"
+  # 4️  Long (≈2 KiB) secret – full round-trip
+  - label: " Long secret (2 KiB)"
     commands: |
-      head -c 2048 </dev/urandom | base64 > bigsecret.txt
-      buildkite-agent redactor add bigsecret.txt
-      cat bigsecret.txt | head -c 10   # prints a chunk that must redact
+    # create one long *single-line* secret (~2 KiB)
+    head -c 2048 </dev/urandom | base64 | tr -d '\n' > bigsecret.txt
+
+    # register the whole value
+    buildkite-agent redactor add bigsecret.txt
+
+    # echo it back exactly as stored
+    cat bigsecret.txt
 
   #   Overlapping secrets (prefix + full)
-  - label: ":five: Overlapping secrets"
+  - label: " Overlapping secrets"
     commands: |
       echo 'abc'     | buildkite-agent redactor add
       echo 'abcdef'  | buildkite-agent redactor add
       echo 'abc abcdef'
 
   #   Same secret repeated on one line
-  - label: ":six: Repeated secret same line"
+  - label: " Repeated secret same line"
     commands: |
       echo 'spam' | buildkite-agent redactor add
       echo 'spam spam spam'
 
   #  Persistence across multiple commands
-  - label: ":seven: Persistence in step"
+  - label: " Persistence in step"
     commands: |
       echo 'staysecret' | buildkite-agent redactor add
       echo 'staysecret first time'
       echo 'staysecret second time'
 
   #   Secret leaked from a “hook / plugin”-style script
-  - label: ":eight: Hook‐style output"
+  - label: " Hook‐style output"
     commands: |
       echo 'hooksecret' | buildkite-agent redactor add
       cat > plugin-script.sh <<'EOF'
@@ -57,28 +62,28 @@ steps:
       ./plugin-script.sh
 
   #   File with no trailing newline
-  - label: ":nine: No-newline file"
+  - label: " No-newline file"
     commands: |
       printf 'nonewline' > nn.txt
       buildkite-agent redactor add nn.txt
       echo 'nonewline'
 
   #   Mixed json / none formats
-  - label: ":ten: Mixed formats"
+  - label: " Mixed formats"
     commands: |
       echo '{"jsonkey":"jsonsecret"}' | buildkite-agent redactor add --format json
       echo 'plainsecret' | buildkite-agent redactor add
       echo 'jsonsecret plainsecret'
 
   #   Binary file content
-  - label: ":eleven: Binary secret"
+  - label: " Binary secret"
     commands: |
       cp "$(command -v ls)" /tmp/ls.bin       # any small binary will do
       buildkite-agent redactor add /tmp/ls.bin
       xxd -l 32 /tmp/ls.bin                   # should print [REDACTED]
 
   #   Parallelism: secret added in every shard
-  - label: ":twelve: Parallel shards"
+  - label: "Parallel shards"
     parallelism: 3
     commands: |
       echo 'parallelsecret' | buildkite-agent redactor add
