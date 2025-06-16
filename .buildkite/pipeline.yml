@@ -71,16 +71,16 @@ steps:
       echo 'jsonsecret plainsecret'
 
 # Binary file content (base64-encoded)
-- label: ":eleven: Binary secret (base64)"
-  commands: |
-    # Grab a small binary (ls) and encode it as one long ASCII line
-    base64 -w0 "$(command -v ls)" > /tmp/ls.bin.b64   # -w0 == no line-wrap
+  - label: ":eleven: Binary secret (base64)"
+    commands: |
+      # Grab a small binary (ls) and encode it as one long ASCII line
+      base64 -w0 "$(command -v ls)" > /tmp/ls.bin.b64   # -w0 == no line-wrap
 
-    # Register that base64 string as the secret
-    cat /tmp/ls.bin.b64 | buildkite-agent redactor add
+      # Register that base64 string as the secret
+      cat /tmp/ls.bin.b64 | buildkite-agent redactor add
 
-    # Echo it back verbatim — should redact
-    cat /tmp/ls.bin.b64
+      # Echo it back verbatim — should redact
+      cat /tmp/ls.bin.b64
 
   #   Parallelism: secret added in every shard
   - label: "Parallel shards"
