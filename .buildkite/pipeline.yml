@@ -70,17 +70,17 @@ steps:
       echo 'plainsecret' | buildkite-agent redactor add
       echo 'jsonsecret plainsecret'
 
- # Binary file content
- - label: ":eleven: Binary secret"
-   commands: |
-     # copy a small binary so we have a predictable path
-     cp "$(command -v ls)" /tmp/ls.bin         
+#   Binary file content
+  - label: ":eleven: Binary secret"
+    commands: |
+      # copy a small binary so we have a predictable path
+      cp "$(command -v ls)" /tmp/ls.bin         
 
-     # register the entire binary as a secret
-     buildkite-agent redactor add /tmp/ls.bin
+      # register the entire binary as a secret
+      buildkite-agent redactor add /tmp/ls.bin
 
-     # emit the exact bytes we just registered
-     cat /tmp/ls.bin                           # should show [REDACTED]
+      # emit the exact bytes we just registered
+      cat /tmp/ls.bin                           # should show [REDACTED]
 
   #   Parallelism: secret added in every shard
   - label: "Parallel shards"
