@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# This runs before every job step
+echo "🔹 BUILDKITE_PLUGIN_ECHO_PARAM_ROLE_ARN=$BUILDKITE_PLUGIN_ECHO_PARAM_ROLE_ARN"
